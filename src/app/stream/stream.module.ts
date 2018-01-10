@@ -4,7 +4,7 @@ import { OverviewComponent } from './overview/overview.component';
 
 import { routing } from './stream.routing';
 
-NgModule({
+@NgModule({
     declarations: [
         OverviewComponent,
     ],
