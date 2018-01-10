@@ -5,7 +5,7 @@ import { OverviewComponent } from './overview/overview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
-  { path: 'overview', component: OverviewComponent, data: { title: 'Overview' } },
+  { path: 'overview', component: OverviewComponent },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

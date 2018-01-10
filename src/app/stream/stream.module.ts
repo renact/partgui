@@ -4,17 +4,12 @@ import { OverviewComponent } from './overview/overview.component';
 
 import { routing } from './stream.routing';
 
-
-
 NgModule({
     declarations: [
-        OverviewComponent
+        OverviewComponent,
     ],
     imports: [ 
-        routing
-    ],
-    exports: [
-        OverviewComponent
+        routing,
     ]
 })
 

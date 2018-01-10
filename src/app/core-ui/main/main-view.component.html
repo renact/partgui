@@ -58,6 +58,29 @@
             </mat-list><!-- .sidebar-item-group -->
           </mat-content>
         </mat-expansion-panel>
+
+        <mat-expansion-panel #panel1 expanded="true" class="no-padding arrow-colored">
+          <mat-expansion-panel-header>Stream</mat-expansion-panel-header>
+          <mat-content>
+            <mat-list class="sidebar-item-group">
+
+              <a class="sidebar-item-link" routerLinkActive="active" [routerLink]="'/stream/overview'">
+                <mat-list-item class="sidebar-item">
+                  <mat-icon class="icon" fontSet="partIcon" fontIcon="part-receive"></mat-icon>
+                  <span class="text">Overview</span>
+                </mat-list-item>
+              </a>
+
+              <a class="sidebar-item-link" routerLinkActive="active" [routerLink]="'/stream/start-streaming'">
+                <mat-list-item class="sidebar-item">
+                  <mat-icon class="icon" fontSet="partIcon" fontIcon="part-send"></mat-icon>
+                  <span class="text">Start streaming</span>
+                </mat-list-item>
+              </a>
+
+            </mat-list><!-- .sidebar-item-group -->
+          </mat-content>
+        </mat-expansion-panel>
       </mat-accordion>
     </mat-content><!-- .sidebar-section -->
 
