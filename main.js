@@ -27,7 +27,7 @@ const daemon   = require('./modules/daemon/daemon');
 let mainWindow;
 let tray;
 let options;
-let openDevTools = false;
+let openDevTools = true;
 
 if (process.argv.includes('-opendevtools'))
   openDevTools = true;
