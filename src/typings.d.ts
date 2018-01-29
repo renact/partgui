@@ -5,4 +5,4 @@ interface NodeModule {
   id: string;
 }
 
-declare var RTCMultiConnection: any;
+declare var Janus: any;

@@ -29,6 +29,8 @@ let tray;
 let options;
 let openDevTools = true;
 
+app.commandLine.appendSwitch('disable-web-security');
+
 if (process.argv.includes('-opendevtools'))
   openDevTools = true;
 
@@ -97,6 +99,7 @@ function initMainWindow() {
     webPreferences: {
       nodeIntegration:  false,
       sandbox:          true,
+      "web-security": false,
       contextIsolation: true,
       preload:          path.join(__dirname, 'preload.js')
     },
