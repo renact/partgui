@@ -29,6 +29,7 @@ export abstract class PluginService implements OnDestroy {
   abstract janus_oncleanup(): void;
 
   destroyed: boolean = false;
+  initialized: boolean = false;
 
   constructor(
     private janusConnection: JanusService
@@ -38,9 +39,14 @@ export abstract class PluginService implements OnDestroy {
 
   api_initialize_plugin() {
     this.janusConnection.life_j
-      .takeWhile(() => !this.destroyed)
+      .takeWhile(() => !this.destroyed || !this.initialized) // take until destroyed or initialized
       .subscribe(
-      alive => alive ? this.janus_attach_videoroom_plugin() : false
+      (alive) => {
+        if (alive) {
+          this.janus_attach_videoroom_plugin();
+          this.initialized = true;
+        }
+      }
       );
   }
 
@@ -48,7 +54,7 @@ export abstract class PluginService implements OnDestroy {
     Attach a video room plugin to te session.
   */
   janus_attach_videoroom_plugin(): void {
-    console.log("Janus: server connected, we can attach the publisher video room plugin");
+    this.log_p.log("Janus: server connected, we can attach the publisher video room plugin");
     // Attach to video room test plugin
 
     this.janusConnection.janus.attach(

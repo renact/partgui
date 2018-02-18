@@ -171,12 +171,14 @@ export class WatchService extends PluginService {
   /*
     Create room & join with username
   */
-  public api_join_room(username: string, room: number) {
-    this.api_initialize_plugin();
-    this.life.skip(1).take(1).subscribe(
-      // note: we have to register as a publisher, listener requires a feed id to be specified..
-      alive => alive ? this.api_register_user_on_session_plugin(username, room, 'publisher') : false // noop (false)
-    );
+  public api_join_room(username: string, room: number): boolean {
+    // check if plugin is alive first..
+    let alive = this.life.getValue();
+    if (alive) {
+      this.api_register_user_on_session_plugin(username, room, 'publisher');
+    } 
+
+    return alive;
   }
 
   /*
