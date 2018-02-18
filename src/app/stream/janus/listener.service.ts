@@ -3,10 +3,11 @@ import { PluginService } from 'app/stream/janus/plugin.service';
 import { JanusService } from 'app/stream/janus/janus.service';
 import { Log } from 'ng2-logger';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 
 
 @Injectable()
-export class ListenerService extends PluginService {
+export class ListenerService extends PluginService implements OnDestroy {
   /*  General   */
   private log_l: any = Log.create('listener.service');
 
@@ -148,5 +149,11 @@ export class ListenerService extends PluginService {
 
   api_detach_listener(): void {
     this.sfutest.detach();
+  }
+
+  ngOnDestroy() {
+    this.log_l.d('Destroying listener with id' + this.id);
+    this.api_detach_listener();
+    this.api_destroy_janus();
   }
 }

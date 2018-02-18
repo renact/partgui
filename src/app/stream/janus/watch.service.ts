@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { JanusService } from 'app/stream/janus/janus.service';
 import { BehaviorSubject } from 'rxjs';
 import { Log } from 'ng2-logger';
@@ -7,7 +7,7 @@ import { ListenerService } from 'app/stream/janus/listener.service';
 import { PluginService } from 'app/stream/janus/plugin.service';
 
 @Injectable()
-export class WatchService extends PluginService {
+export class WatchService extends PluginService implements OnDestroy {
 
   /*  General   */
   private log: any = Log.create('watch.service');
@@ -192,5 +192,14 @@ export class WatchService extends PluginService {
       }
     });
     return streams;
+  }
+
+  ngOnDestroy() {
+    // manually call on destroy on the listener plugins
+    this.feeds.forEach(
+      (listener) => {
+        listener.ngOnDestroy();
+      }
+    )
   }
 }
