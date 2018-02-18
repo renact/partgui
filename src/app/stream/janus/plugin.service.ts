@@ -54,7 +54,7 @@ export abstract class PluginService implements OnDestroy {
     Attach a video room plugin to te session.
   */
   janus_attach_videoroom_plugin(): void {
-    this.log_p.log("Janus: server connected, we can attach the publisher video room plugin");
+    this.log_p.d("Janus: server connected, we can attach the publisher video room plugin");
     // Attach to video room test plugin
 
     this.janusConnection.janus.attach(
