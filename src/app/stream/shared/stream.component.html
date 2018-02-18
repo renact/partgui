@@ -1,4 +1,3 @@
-<video #localvideo width="100%" height="100%" autoplay muted="muted"></video>
-<video #remotevideo width="100%" height="100%" autoplay (playing)="ui_onPlayingSetResolution(this)"></video> <!-- maybe remoteVideo instead of this -->
+<video #video width="100%" height="100%" autoplay></video> <!-- maybe remoteVideo instead of this -->
 <span style="position: absolute; bottom: 0px; left: 0px; margin: 15px;">{{currentResolution}}</span>
 <span #curbitrate style="position: absolute; bottom: 0px; right: 0px; margin: 15px;">{{currentBitrate}}</span>

@@ -95,7 +95,7 @@ function initMainWindow() {
     minWidth:  961,
     maxWidth:  1920,
     height:    675,
-    resizable: false,
+    resizable: true,
     webPreferences: {
       nodeIntegration:  false,
       sandbox:          true,

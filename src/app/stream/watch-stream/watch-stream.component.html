@@ -1,0 +1,6 @@
+<button (click)="joinRoom()">Join room</button>
+
+<!-- Stream all cameras in a specific room -->
+<div *ngFor="let stream of streams">
+  <vid-stream [stream]="stream"></vid-stream>
+</div> 
