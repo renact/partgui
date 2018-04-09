@@ -152,6 +152,9 @@ export class ListenerService extends PluginService implements OnDestroy {
   }
 
   ngOnDestroy() {
+    // destroy plugin service
+    super.ngOnDestroy();
+    
     this.log_l.d('Destroying listener with id' + this.id);
     this.api_detach_listener();
     this.api_destroy_janus();

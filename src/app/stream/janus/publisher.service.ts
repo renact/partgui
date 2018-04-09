@@ -229,4 +229,10 @@ export class PublisherService extends PluginService {
     this.api_destroy_janus();
   }
 
+  ngOnDestroy() {
+    // destroy plugin service first
+    super.ngOnDestroy();
+    this.log.d('Destroying publisher service');
+  }
+
 }

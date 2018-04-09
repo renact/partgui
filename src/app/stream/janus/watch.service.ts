@@ -195,11 +195,17 @@ export class WatchService extends PluginService implements OnDestroy {
   }
 
   ngOnDestroy() {
+    // destroy plugin service
+    super.ngOnDestroy();
+    
+    this.log.d('Destroying watch service');
     // manually call on destroy on the listener plugins
     this.feeds.forEach(
       (listener) => {
         listener.ngOnDestroy();
       }
-    )
+    );
+
+
   }
 }

@@ -34,10 +34,10 @@ export abstract class PluginService implements OnDestroy {
   constructor(
     private janusConnection: JanusService
   ) { 
-    this.api_initialize_plugin();
+    this.janus_initialize_plugin();
   }
 
-  api_initialize_plugin() {
+  janus_initialize_plugin() {
     this.janusConnection.life_j
       .takeWhile(() => !this.destroyed || !this.initialized) // take until destroyed or initialized
       .subscribe(
