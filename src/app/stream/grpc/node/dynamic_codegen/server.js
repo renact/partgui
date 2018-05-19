@@ -20,7 +20,7 @@ function updateRoom(call, callback){
     callback(null, {updated: true});
 }
 
-function deleteRoom(call, callback){
+function deleteRoom(call, carellback){
     callback(null, {deleted: true});
 }
 
