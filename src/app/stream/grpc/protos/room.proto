@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.room";
+option java_outer_classname = "RoomProto";
+option objc_class_prefix = "RO";
+
+package room;
+
+service Room {
+    rpc GetAllRooms (Empty) returns (AllRoomsReply){}
+    rpc GetRoomById (RoomByIdRequest) returns (RoomByIdReply){}
+    rpc CreateRoom (CreateRoomRequest) returns (CreateRoomReply){}
+    rpc UpdateRoom (UpdateRoomRequest) returns (UpdateRoomReply){}
+    rpc DeleteRoom (DeleteRoomRequest) returns (DeleteRoomReply){}
+}
+
+message Empty{}
+
+// message RoomObj{
+//     string id = 1;
+//     string name = 2;
+// }
+
+message AllRoomsReply{
+    //repeated RoomObj rooms = 1;
+    string id = 1;
+    string name = 2;
+    string serverUrl = 3;
+}
+
+message RoomByIdRequest{
+    string id = 1;
+}
+
+message RoomByIdReply{
+    string name = 1;
+    string serverUrl = 2;
+}
+
+message CreateRoomRequest{
+    string id = 1;
+    string name = 2;
+    string serverUrl = 3;
+}
+
+message CreateRoomReply{
+    bool created = 1;
+}
+
+message UpdateRoomRequest{
+    string id = 1;
+    string name = 2;
+    string serverUrl = 3;
+}
+
+message UpdateRoomReply{
+    bool updated = 1;
+}
+
+message DeleteRoomRequest{
+    string id = 1;
+}
+
+message DeleteRoomReply{
+    bool deleted = 1;
+}
+
