@@ -19,9 +19,6 @@ import { WatchStreamComponent } from './watch-stream/watch-stream.component';
         StartStreamComponent,
         WatchStreamComponent
     ],
-    providers: [
-        grpcService
-    ],
     imports: [ 
         CommonModule,
         routing,
@@ -33,6 +30,12 @@ import { WatchStreamComponent } from './watch-stream/watch-stream.component';
 })
 
 export class StreamViewsModule {
-    constructor() {
-    }
+    static forRoot(): ModuleWithProviders {
+        return {
+          ngModule: StreamViewsModule,
+          providers: [
+            grpcService
+          ]
+        };
+      }
   }

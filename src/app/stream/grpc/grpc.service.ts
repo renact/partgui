@@ -1,5 +1,5 @@
 import {grpc} from "grpc-web-client";
-import {RoomService} from "./compiled-proto/room_grpc_pb";
+import {Room} from "./compiled-proto/room_pb_service";
 import {RoomByIdRequest} from "./compiled-proto/room_pb";
 
 declare const USE_TLS: boolean;
@@ -9,7 +9,7 @@ export class grpcService{
     getRoomById() {
       const roomByIdRequest = new RoomByIdRequest ();
       roomByIdRequest.setId('1234');
-      grpc.unary(RoomService.GetRoomById, {
+      grpc.unary(Room.GetRoomById, {
         request: roomByIdRequest, 
         host: host,
         onEnd: res => {
