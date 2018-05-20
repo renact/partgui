@@ -380,7 +380,9 @@ proto.room.RoomByIdRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.room.RoomByIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, "")
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    page: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    size: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -421,6 +423,14 @@ proto.room.RoomByIdRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setId(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPage(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSize(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -457,6 +467,20 @@ proto.room.RoomByIdRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getPage();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getSize();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -472,6 +496,36 @@ proto.room.RoomByIdRequest.prototype.getId = function() {
 /** @param {string} value */
 proto.room.RoomByIdRequest.prototype.setId = function(value) {
   jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional string page = 2;
+ * @return {string}
+ */
+proto.room.RoomByIdRequest.prototype.getPage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.room.RoomByIdRequest.prototype.setPage = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional string size = 3;
+ * @return {string}
+ */
+proto.room.RoomByIdRequest.prototype.getSize = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.room.RoomByIdRequest.prototype.setSize = function(value) {
+  jspb.Message.setField(this, 3, value);
 };
 
 
@@ -693,7 +747,8 @@ proto.room.CreateRoomRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    serverurl: jspb.Message.getFieldWithDefault(msg, 3, "")
+    serverurl: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    password: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -741,6 +796,10 @@ proto.room.CreateRoomRequest.deserializeBinaryFromReader = function(msg, reader)
     case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setServerurl(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPassword(value);
       break;
     default:
       reader.skipField();
@@ -792,6 +851,13 @@ proto.room.CreateRoomRequest.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
+  f = message.getPassword();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
 };
 
 
@@ -837,6 +903,21 @@ proto.room.CreateRoomRequest.prototype.getServerurl = function() {
 /** @param {string} value */
 proto.room.CreateRoomRequest.prototype.setServerurl = function(value) {
   jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * optional string password = 4;
+ * @return {string}
+ */
+proto.room.CreateRoomRequest.prototype.getPassword = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.room.CreateRoomRequest.prototype.setPassword = function(value) {
+  jspb.Message.setField(this, 4, value);
 };
 
 
@@ -1033,7 +1114,8 @@ proto.room.UpdateRoomRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    serverurl: jspb.Message.getFieldWithDefault(msg, 3, "")
+    serverurl: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    password: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -1081,6 +1163,10 @@ proto.room.UpdateRoomRequest.deserializeBinaryFromReader = function(msg, reader)
     case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setServerurl(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPassword(value);
       break;
     default:
       reader.skipField();
@@ -1132,6 +1218,13 @@ proto.room.UpdateRoomRequest.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
+  f = message.getPassword();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
 };
 
 
@@ -1177,6 +1270,21 @@ proto.room.UpdateRoomRequest.prototype.getServerurl = function() {
 /** @param {string} value */
 proto.room.UpdateRoomRequest.prototype.setServerurl = function(value) {
   jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * optional string password = 4;
+ * @return {string}
+ */
+proto.room.UpdateRoomRequest.prototype.getPassword = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.room.UpdateRoomRequest.prototype.setPassword = function(value) {
+  jspb.Message.setField(this, 4, value);
 };
 
 

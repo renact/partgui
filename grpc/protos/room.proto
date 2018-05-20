@@ -31,6 +31,8 @@ message AllRoomsReply{
 
 message RoomByIdRequest{
     string id = 1;
+    string page = 2;
+    string size = 3;
 }
 
 message RoomByIdReply{
@@ -42,6 +44,7 @@ message CreateRoomRequest{
     string id = 1;
     string name = 2;
     string serverUrl = 3;
+    string password = 4;
 }
 
 message CreateRoomReply{
@@ -52,6 +55,7 @@ message UpdateRoomRequest{
     string id = 1;
     string name = 2;
     string serverUrl = 3;
+    string password = 4;
 }
 
 message UpdateRoomReply{

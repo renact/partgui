@@ -5,6 +5,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { PreviewComponent } from './preview/preview.component'
 import { StreamComponent } from './shared/stream.component';
 import { JanusModule } from './janus/janus.module';
+import { grpcService } from './grpc/grpc.service';
 
 import { routing } from './stream.routing';
 import { StartStreamComponent } from './start-stream/start-stream.component';
@@ -17,6 +18,9 @@ import { WatchStreamComponent } from './watch-stream/watch-stream.component';
         StreamComponent,
         StartStreamComponent,
         WatchStreamComponent
+    ],
+    providers: [
+        grpcService
     ],
     imports: [ 
         CommonModule,

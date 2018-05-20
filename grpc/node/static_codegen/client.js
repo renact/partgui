@@ -38,6 +38,8 @@ function main() {
 
   request = new messages.RoomByIdRequest();
   request.setId('1');
+  request.setPage('1');
+  request.setSize('1');
   client.getRoomById(request, function(err, response) {
     console.log('GetRoomById: ', response.getName());
   });
@@ -46,6 +48,7 @@ function main() {
   request.setId('1');
   request.setName('first');
   request.setServerurl('url');
+  request.setPassword('test');
   client.createRoom(request, function(err, response) {
     console.log('CreateRoom: ', response.getCreated());
   });
@@ -54,6 +57,7 @@ function main() {
   request.setId('1');
   request.setName('first');
   request.setServerurl('url');
+  request.setPassword('test');  
   client.updateRoom(request, function(err, response) {
     console.log('UpdateRoom: ', response.getUpdated());
   });
