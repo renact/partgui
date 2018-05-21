@@ -5,7 +5,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { PreviewComponent } from './preview/preview.component'
 import { StreamComponent } from './shared/stream.component';
 import { JanusModule } from './janus/janus.module';
-import { grpcService } from './grpc/grpc.service';
+import { GrpcModule } from './grpc/grpc.module';
 
 import { routing } from './stream.routing';
 import { StartStreamComponent } from './start-stream/start-stream.component';
@@ -22,7 +22,8 @@ import { WatchStreamComponent } from './watch-stream/watch-stream.component';
     imports: [ 
         CommonModule,
         routing,
-        JanusModule
+        JanusModule,
+        GrpcModule
     ],
     exports: [
         StreamComponent
@@ -30,12 +31,6 @@ import { WatchStreamComponent } from './watch-stream/watch-stream.component';
 })
 
 export class StreamViewsModule {
-    static forRoot(): ModuleWithProviders {
-        return {
-          ngModule: StreamViewsModule,
-          providers: [
-            grpcService
-          ]
-        };
-      }
+    constructor() {
+    }
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {grpcService} from '../grpc/grpc.service';
+import {GrpcService} from '../grpc/grpc.service';
 
 @Component({
   selector: 'app-overview',
@@ -8,7 +8,7 @@ import {grpcService} from '../grpc/grpc.service';
 export class OverviewComponent implements OnInit {
 
   constructor(
-    private grpc: grpcService
+    private grpc: GrpcService
   ) { }
 
   ngOnInit(){

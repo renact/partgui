@@ -22,7 +22,7 @@ var services = require('./room_grpc_pb');
 var grpc = require('grpc');
 
 function main() {
-  var client = new services.RoomClient('localhost:50051',
+  var client = new services.RoomClient('127.0.0.1:50051',
                                           grpc.credentials.createInsecure());
   var request = new messages.Empty();
   var user;

@@ -67,7 +67,7 @@ function main() {
   server.addService(services.RoomService, 
     {getAllRooms: getAllRooms, getRoomById: getRoomById,
      createRoom: createRoom, updateRoom: updateRoom, deleteRoom: deleteRoom});
-  server.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
+  server.bind('127.0.0.1:50051', grpc.ServerCredentials.createInsecure());
   server.start();
 }
 

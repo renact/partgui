@@ -38,7 +38,8 @@
     "generate-release": "node ./modules/clientBinaries/generateVersions.js",
     "proto": "npm run proto:win:js && npm run proto:win:ts",
     "proto:win:js": "protoc-gen-grpc --js_out=import_style=commonjs,binary:./grpc/compiled --grpc_out=./grpc/compiled --proto_path ./grpc/protos ./grpc/protos/room.proto",
-    "proto:win:ts": "protoc-gen-grpc-ts --ts_out=service=true:./grpc/compiled --proto_path ./grpc/protos ./grpc/protos/room.proto"
+    "proto:win:ts": "protoc-gen-grpc-ts --ts_out=service=true:./grpc/compiled --proto_path ./grpc/protos ./grpc/protos/room.proto",
+    "server": "node grpc/compiled/server.js"
   },
   "productName": "Particl Wallet",
   "build": {
@@ -96,6 +97,7 @@
     "asar": true
   },
   "dependencies": {
+    "@angular-devkit/schematics": "0.0.40",
     "@angular/animations": "^5.1.2",
     "@angular/cdk": "^5.0.2",
     "@angular/common": "^5.1.2",
@@ -142,6 +144,7 @@
     "zone.js": "^0.8.18"
   },
   "devDependencies": {
+    "@angular-devkit/core": "^0.6.3",
     "@angular/cli": "^1.6.1",
     "@angular/compiler-cli": "^5.1.2",
     "@compodoc/compodoc": "^1.0.4",
