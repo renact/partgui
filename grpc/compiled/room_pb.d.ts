@@ -1,7 +1,7 @@
 // package: room
 // file: room.proto
 
-import * as jspb from "google-protobuf";
+import * as jspb from 'google-protobuf';
 
 export class Empty extends jspb.Message {
   serializeBinary(): Uint8Array;
@@ -19,7 +19,7 @@ export namespace Empty {
   }
 }
 
-export class AllRoomsReply extends jspb.Message {
+export class Room extends jspb.Message {
   getId(): string;
   setId(value: string): void;
 
@@ -28,6 +28,36 @@ export class AllRoomsReply extends jspb.Message {
 
   getServerurl(): string;
   setServerurl(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Room.AsObject;
+  static toObject(includeInstance: boolean, msg: Room): Room.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: Room, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Room;
+  static deserializeBinaryFromReader(message: Room, reader: jspb.BinaryReader): Room;
+}
+
+export namespace Room {
+  export type AsObject = {
+    id: string,
+    name: string,
+    serverurl: string,
+  }
+}
+
+export class AllRoomsReply extends jspb.Message {
+  clearRoomsList(): void;
+  getRoomsList(): Array<Room>;
+  setRoomsList(value: Array<Room>): void;
+  addRooms(value?: Room, index?: number): Room;
+
+  getPage(): string;
+  setPage(value: string): void;
+
+  getSize(): string;
+  setSize(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AllRoomsReply.AsObject;
@@ -41,21 +71,15 @@ export class AllRoomsReply extends jspb.Message {
 
 export namespace AllRoomsReply {
   export type AsObject = {
-    id: string,
-    name: string,
-    serverurl: string,
+    roomsList: Array<Room.AsObject>,
+    page: string,
+    size: string,
   }
 }
 
 export class RoomByIdRequest extends jspb.Message {
   getId(): string;
   setId(value: string): void;
-
-  getPage(): string;
-  setPage(value: string): void;
-
-  getSize(): string;
-  setSize(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): RoomByIdRequest.AsObject;
@@ -70,17 +94,14 @@ export class RoomByIdRequest extends jspb.Message {
 export namespace RoomByIdRequest {
   export type AsObject = {
     id: string,
-    page: string,
-    size: string,
   }
 }
 
 export class RoomByIdReply extends jspb.Message {
-  getName(): string;
-  setName(value: string): void;
-
-  getServerurl(): string;
-  setServerurl(value: string): void;
+  hasRoom(): boolean;
+  clearRoom(): void;
+  getRoom(): Room | undefined;
+  setRoom(value?: Room): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): RoomByIdReply.AsObject;
@@ -94,20 +115,15 @@ export class RoomByIdReply extends jspb.Message {
 
 export namespace RoomByIdReply {
   export type AsObject = {
-    name: string,
-    serverurl: string,
+    room?: Room.AsObject,
   }
 }
 
 export class CreateRoomRequest extends jspb.Message {
-  getId(): string;
-  setId(value: string): void;
-
-  getName(): string;
-  setName(value: string): void;
-
-  getServerurl(): string;
-  setServerurl(value: string): void;
+  hasRoom(): boolean;
+  clearRoom(): void;
+  getRoom(): Room | undefined;
+  setRoom(value?: Room): void;
 
   getPassword(): string;
   setPassword(value: string): void;
@@ -124,9 +140,7 @@ export class CreateRoomRequest extends jspb.Message {
 
 export namespace CreateRoomRequest {
   export type AsObject = {
-    id: string,
-    name: string,
-    serverurl: string,
+    room?: Room.AsObject,
     password: string,
   }
 }
@@ -152,14 +166,10 @@ export namespace CreateRoomReply {
 }
 
 export class UpdateRoomRequest extends jspb.Message {
-  getId(): string;
-  setId(value: string): void;
-
-  getName(): string;
-  setName(value: string): void;
-
-  getServerurl(): string;
-  setServerurl(value: string): void;
+  hasRoom(): boolean;
+  clearRoom(): void;
+  getRoom(): Room | undefined;
+  setRoom(value?: Room): void;
 
   getPassword(): string;
   setPassword(value: string): void;
@@ -176,9 +186,7 @@ export class UpdateRoomRequest extends jspb.Message {
 
 export namespace UpdateRoomRequest {
   export type AsObject = {
-    id: string,
-    name: string,
-    serverurl: string,
+    room?: Room.AsObject,
     password: string,
   }
 }

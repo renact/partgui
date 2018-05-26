@@ -36,9 +36,7 @@
     "coveralls": "cat ./coverage/lcov.info | node ./node_modules/coveralls/bin/coveralls.js",
     "compodoc": "compodoc -p tsconfig.json -d docs",
     "generate-release": "node ./modules/clientBinaries/generateVersions.js",
-    "proto": "npm run proto:win:js && npm run proto:win:ts",
-    "proto:win:js": "protoc-gen-grpc --js_out=import_style=commonjs,binary:./grpc/compiled --grpc_out=./grpc/compiled --proto_path ./grpc/protos ./grpc/protos/room.proto",
-    "proto:win:ts": "protoc-gen-grpc-ts --ts_out=service=true:./grpc/compiled --proto_path ./grpc/protos ./grpc/protos/room.proto",
+    "proto": "protoc-gen-grpc --plugin=protoc-gen-ts=./node_modules/ts-protoc-gen/bin/protoc-gen-ts --js_out=import_style=commonjs,binary:./grpc/compiled --ts_out=service=true:./grpc/compiled --proto_path ./grpc/protos ./grpc/protos/room.proto",
     "server": "node grpc/compiled/server.js"
   },
   "productName": "Particl Wallet",

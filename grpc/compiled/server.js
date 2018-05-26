@@ -27,16 +27,32 @@ var grpc = require('grpc');
 
 function getAllRooms(call, callback){
     var reply = new messages.AllRoomsReply();
-    reply.setId('1');
-    reply.setName('first');
-    reply.setServerurl('url');
+
+    var testRooms = [
+        {id: '1', name: 'first', serverUrl: 'url'},
+        {id: '2', name: 'second', serverUrl: 'url'}
+    ];
+    
+    testRooms.forEach(item => {
+        let room = new messages.Room();
+        room.setId(item.id);
+        room.setName(item.name);
+        room.setServerurl(item.serverUrl);
+        reply.addRooms(room);
+    });
+    
+    reply.setPage('1');
+    reply.setSize('1');
     callback(null, reply);
 }
 
 function getRoomById(call, callback){
     var reply = new messages.RoomByIdReply();
-    reply.setName('first1');
-    reply.setServerurl('url');
+    var room = new messages.Room();
+    room.setId('1');
+    room.setName('first1');
+    room.setServerurl('url');
+    reply.setRoom(room);
     callback(null, reply);
 }
 
@@ -64,7 +80,7 @@ function deleteRoom(call, callback){
  */
 function main() {
   var server = new grpc.Server();
-  server.addService(services.RoomService, 
+  server.addService(services.RoomManagerService, 
     {getAllRooms: getAllRooms, getRoomById: getRoomById,
      createRoom: createRoom, updateRoom: updateRoom, deleteRoom: deleteRoom});
   server.bind('127.0.0.1:50051', grpc.ServerCredentials.createInsecure());

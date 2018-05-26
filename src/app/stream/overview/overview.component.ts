@@ -12,10 +12,11 @@ export class OverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    this.grpc.getRoomById();
-    this.grpc.createRoom();
-    this.grpc.updateRoom();
-    this.grpc.deleteRoom();
+    // this.grpc.getRoomById();
+    // this.grpc.createRoom();
+    // this.grpc.updateRoom();
+    // this.grpc.deleteRoom();
+    this.grpc.getAllRooms();
   }
 
  }

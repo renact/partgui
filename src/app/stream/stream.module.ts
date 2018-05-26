@@ -6,6 +6,8 @@ import { PreviewComponent } from './preview/preview.component'
 import { StreamComponent } from './shared/stream.component';
 import { JanusModule } from './janus/janus.module';
 import { GrpcModule } from './grpc/grpc.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
 
 import { routing } from './stream.routing';
 import { StartStreamComponent } from './start-stream/start-stream.component';
@@ -23,10 +25,17 @@ import { WatchStreamComponent } from './watch-stream/watch-stream.component';
         CommonModule,
         routing,
         JanusModule,
-        GrpcModule
+        GrpcModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule
     ],
     exports: [
-        StreamComponent
+        StreamComponent,
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 

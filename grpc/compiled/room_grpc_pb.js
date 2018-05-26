@@ -115,9 +115,9 @@ function deserialize_room_UpdateRoomRequest(buffer_arg) {
 }
 
 
-var RoomService = exports.RoomService = {
+var RoomManagerService = exports.RoomManagerService = {
   getAllRooms: {
-    path: '/room.Room/GetAllRooms',
+    path: '/room.RoomManager/GetAllRooms',
     requestStream: false,
     responseStream: false,
     requestType: room_pb.Empty,
@@ -128,7 +128,7 @@ var RoomService = exports.RoomService = {
     responseDeserialize: deserialize_room_AllRoomsReply,
   },
   getRoomById: {
-    path: '/room.Room/GetRoomById',
+    path: '/room.RoomManager/GetRoomById',
     requestStream: false,
     responseStream: false,
     requestType: room_pb.RoomByIdRequest,
@@ -139,7 +139,7 @@ var RoomService = exports.RoomService = {
     responseDeserialize: deserialize_room_RoomByIdReply,
   },
   createRoom: {
-    path: '/room.Room/CreateRoom',
+    path: '/room.RoomManager/CreateRoom',
     requestStream: false,
     responseStream: false,
     requestType: room_pb.CreateRoomRequest,
@@ -150,7 +150,7 @@ var RoomService = exports.RoomService = {
     responseDeserialize: deserialize_room_CreateRoomReply,
   },
   updateRoom: {
-    path: '/room.Room/UpdateRoom',
+    path: '/room.RoomManager/UpdateRoom',
     requestStream: false,
     responseStream: false,
     requestType: room_pb.UpdateRoomRequest,
@@ -161,7 +161,7 @@ var RoomService = exports.RoomService = {
     responseDeserialize: deserialize_room_UpdateRoomReply,
   },
   deleteRoom: {
-    path: '/room.Room/DeleteRoom',
+    path: '/room.RoomManager/DeleteRoom',
     requestStream: false,
     responseStream: false,
     requestType: room_pb.DeleteRoomRequest,
@@ -173,4 +173,4 @@ var RoomService = exports.RoomService = {
   },
 };
 
-exports.RoomClient = grpc.makeGenericClientConstructor(RoomService);
+exports.RoomManagerClient = grpc.makeGenericClientConstructor(RoomManagerService);

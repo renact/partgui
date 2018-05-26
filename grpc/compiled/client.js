@@ -22,9 +22,10 @@ var services = require('./room_grpc_pb');
 var grpc = require('grpc');
 
 function main() {
-  var client = new services.RoomClient('127.0.0.1:50051',
+  var client = new services.RoomManagerClient('127.0.0.1:50051',
                                           grpc.credentials.createInsecure());
   var request = new messages.Empty();
+  var room = new messages.Room();
   var user;
   if (process.argv.length >= 3) {
     user = process.argv[2];
@@ -33,31 +34,31 @@ function main() {
   }
 
   client.getAllRooms(request, function(err, response) {
-    console.log('GetAllRooms: ', response.getName());
+    console.log('GetAllRooms: ', response.getRoomsList());
   });
 
   request = new messages.RoomByIdRequest();
   request.setId('1');
-  request.setPage('1');
-  request.setSize('1');
   client.getRoomById(request, function(err, response) {
-    console.log('GetRoomById: ', response.getName());
+    console.log('GetRoomById: ', response.getRoom());
   });
 
   request = new messages.CreateRoomRequest();
-  request.setId('1');
-  request.setName('first');
-  request.setServerurl('url');
-  request.setPassword('test');
+  room = new messages.Room();
+  room.setId('1');
+  room.setName('first');
+  room.setServerurl('url');
+  request.setRoom(room);
   client.createRoom(request, function(err, response) {
     console.log('CreateRoom: ', response.getCreated());
   });
 
   request = new messages.UpdateRoomRequest();
-  request.setId('1');
-  request.setName('first');
-  request.setServerurl('url');
-  request.setPassword('test');  
+  room = new messages.Room();
+  room.setId('1');
+  room.setName('first');
+  room.setServerurl('url');
+  request.setRoom(room);
   client.updateRoom(request, function(err, response) {
     console.log('UpdateRoom: ', response.getUpdated());
   });

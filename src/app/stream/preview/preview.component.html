@@ -1,3 +1,12 @@
+join room: 
+<form [formGroup]="roomForm" (submit)="joinRoom()">
+    <mat-form-field>
+        <input matInput formControlName="id" id="id" placeholder="id">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!roomForm.valid">Join</button>
+</form>
+
 <video #videoElement width="320" height="240" loop (mouseenter)="mouseEnter(videoElement)" (mouseleave)="mouseLeave(videoElement)">
     <source src="https://raw.githubusercontent.com/bradkav/EarthShadow/master/videos/moll_Operator1.mp4" type="video/mp4" (mouseover)="mouseEnter(this)">
 </video>

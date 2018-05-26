@@ -1,12 +1,17 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy, Inject } from '@angular/core';
 import { PublisherService } from 'app/stream/janus/publisher.service';
 import { JanusService } from 'app/stream/janus/janus.service';
+import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { GrpcService } from '../grpc/grpc.service';
+
 
 @Component({
   selector: 'app-start-stream',
   templateUrl: './start-stream.component.html',
   styleUrls: ['./start-stream.component.scss'],
-  providers: [JanusService, PublisherService]
+  providers: [JanusService, PublisherService],
+
 })
 export class StartStreamComponent implements OnInit, OnDestroy {
 
@@ -19,9 +24,30 @@ export class StartStreamComponent implements OnInit, OnDestroy {
   /* DOM element references */
   @ViewChild("localvideo", { read: ElementRef }) localvideo: ElementRef;
 
+  /* Form */
+  roomForm: any;
+
+  roomCreated: boolean = false;
+
   constructor(
-    private publisher: PublisherService
-  ) { }
+    private publisher: PublisherService,
+    private formBuilder: FormBuilder,
+    private grpc: GrpcService
+  ) {
+    this.roomForm = this.formBuilder.group({
+      'name': ['', Validators.required],
+      'password': ['', [Validators.required]],
+    });
+
+   }
+
+  createRoom() {
+    if (this.roomForm.dirty && this.roomForm.valid) {
+      this.grpc.createRoom('1234', this.roomForm.value.name, 'url', this.roomForm.value.password);
+      this.roomCreated = true;
+      console.log(`Create room:" ${this.roomForm.value.name}`)
+    }
+  }
 
   ngOnInit() {
 
@@ -53,6 +79,7 @@ export class StartStreamComponent implements OnInit, OnDestroy {
     if (this.life_plugin) {
       this.publisher.api_quit_stream();
     }
+    this.roomCreated = false;
   }
 
   ngOnDestroy() {

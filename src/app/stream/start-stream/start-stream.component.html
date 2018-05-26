@@ -1,5 +1,24 @@
-local stream:
-<button (click)="startStreaming()">Start streaming</button>
-<button (click)="stopStreaming()">Stop streaming</button>
-<button (click)="quitRoom()">Close room</button>
-<video #localvideo width="100%" height="100%" autoplay muted="muted"></video>
+<div *ngIf="!roomCreated">
+    <br>Create new room: 
+    <form [formGroup]="roomForm" (submit)="createRoom()">
+        <mat-form-field>
+            <input matInput formControlName="name" id="name" placeholder="name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput formControlName="password" id="password" type="password" placeholder="password">
+        </mat-form-field>
+    
+        <button mat-raised-button color="primary" type="submit" [disabled]="!roomForm.valid">Submit</button>
+    </form>
+</div>
+
+<div *ngIf="roomCreated">
+    local stream:
+    <button (click)="startStreaming()">Start streaming</button>
+    <button (click)="stopStreaming()">Stop streaming</button>
+    <button (click)="quitRoom()">Close room</button>
+
+
+    <video #localvideo width="100%" height="100%" autoplay muted="muted"></video>
+</div>
