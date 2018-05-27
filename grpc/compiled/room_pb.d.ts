@@ -1,7 +1,7 @@
 // package: room
 // file: room.proto
 
-import * as jspb from 'google-protobuf';
+import * as jspb from "google-protobuf";
 
 export class Empty extends jspb.Message {
   serializeBinary(): Uint8Array;
@@ -29,6 +29,9 @@ export class Room extends jspb.Message {
   getServerurl(): string;
   setServerurl(value: string): void;
 
+  getToken(): string;
+  setToken(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Room.AsObject;
   static toObject(includeInstance: boolean, msg: Room): Room.AsObject;
@@ -44,6 +47,7 @@ export namespace Room {
     id: string,
     name: string,
     serverurl: string,
+    token: string,
   }
 }
 
@@ -125,9 +129,6 @@ export class CreateRoomRequest extends jspb.Message {
   getRoom(): Room | undefined;
   setRoom(value?: Room): void;
 
-  getPassword(): string;
-  setPassword(value: string): void;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateRoomRequest.AsObject;
   static toObject(includeInstance: boolean, msg: CreateRoomRequest): CreateRoomRequest.AsObject;
@@ -141,7 +142,6 @@ export class CreateRoomRequest extends jspb.Message {
 export namespace CreateRoomRequest {
   export type AsObject = {
     room?: Room.AsObject,
-    password: string,
   }
 }
 
@@ -171,9 +171,6 @@ export class UpdateRoomRequest extends jspb.Message {
   getRoom(): Room | undefined;
   setRoom(value?: Room): void;
 
-  getPassword(): string;
-  setPassword(value: string): void;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateRoomRequest.AsObject;
   static toObject(includeInstance: boolean, msg: UpdateRoomRequest): UpdateRoomRequest.AsObject;
@@ -187,7 +184,6 @@ export class UpdateRoomRequest extends jspb.Message {
 export namespace UpdateRoomRequest {
   export type AsObject = {
     room?: Room.AsObject,
-    password: string,
   }
 }
 
@@ -212,8 +208,10 @@ export namespace UpdateRoomReply {
 }
 
 export class DeleteRoomRequest extends jspb.Message {
-  getId(): string;
-  setId(value: string): void;
+  hasRoom(): boolean;
+  clearRoom(): void;
+  getRoom(): Room | undefined;
+  setRoom(value?: Room): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeleteRoomRequest.AsObject;
@@ -227,7 +225,7 @@ export class DeleteRoomRequest extends jspb.Message {
 
 export namespace DeleteRoomRequest {
   export type AsObject = {
-    id: string,
+    room?: Room.AsObject,
   }
 }
 

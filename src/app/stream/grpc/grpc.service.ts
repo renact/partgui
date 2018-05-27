@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { grpc} from "grpc-web-client";
-import { Room as RoomManager } from "./compiled-proto/room_pb_service";
-import { RoomByIdRequest } from "./compiled-proto/room_pb";
-import { RoomByIdReply, Empty, AllRoomsReply, CreateRoomRequest, UpdateRoomRequest, DeleteRoomRequest, Room} from '../../../../grpc/compiled/room_pb';
+import { RoomManager, RoomManagerClient } from "../../../../grpc/compiled/room_pb_service";
+import { RoomByIdReply, Empty, AllRoomsReply, CreateRoomRequest, UpdateRoomRequest, DeleteRoomRequest, RoomByIdRequest, Room} from '../../../../grpc/compiled/room_pb';
 
 const host = "http://127.0.0.1:8080";
+const client = new RoomManagerClient("http://127.0.0.1:8080");
 
 @Injectable()
 export class GrpcService {
@@ -78,9 +78,13 @@ export class GrpcService {
     });
   }
 
-  deleteRoom(id: string){
+  deleteRoom(id: string, name: string, serverUrl: string){
     const deleteRoomRequest = new DeleteRoomRequest();
-    deleteRoomRequest.setId(id);
+    const room = new Room()
+    room.setId(id);
+    room.setName(name);
+    room.setServerurl(serverUrl);
+    deleteRoomRequest.setRoom(room);
     grpc.unary(RoomManager.DeleteRoom, {
       request: deleteRoomRequest,
       host: host,

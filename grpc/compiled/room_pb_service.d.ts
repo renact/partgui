@@ -4,58 +4,58 @@
 import * as room_pb from "./room_pb";
 import {grpc} from "grpc-web-client";
 
-type RoomGetAllRooms = {
+type RoomManagerGetAllRooms = {
   readonly methodName: string;
-  readonly service: typeof Room;
+  readonly service: typeof RoomManager;
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof room_pb.Empty;
   readonly responseType: typeof room_pb.AllRoomsReply;
 };
 
-type RoomGetRoomById = {
+type RoomManagerGetRoomById = {
   readonly methodName: string;
-  readonly service: typeof Room;
+  readonly service: typeof RoomManager;
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof room_pb.RoomByIdRequest;
   readonly responseType: typeof room_pb.RoomByIdReply;
 };
 
-type RoomCreateRoom = {
+type RoomManagerCreateRoom = {
   readonly methodName: string;
-  readonly service: typeof Room;
+  readonly service: typeof RoomManager;
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof room_pb.CreateRoomRequest;
   readonly responseType: typeof room_pb.CreateRoomReply;
 };
 
-type RoomUpdateRoom = {
+type RoomManagerUpdateRoom = {
   readonly methodName: string;
-  readonly service: typeof Room;
+  readonly service: typeof RoomManager;
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof room_pb.UpdateRoomRequest;
   readonly responseType: typeof room_pb.UpdateRoomReply;
 };
 
-type RoomDeleteRoom = {
+type RoomManagerDeleteRoom = {
   readonly methodName: string;
-  readonly service: typeof Room;
+  readonly service: typeof RoomManager;
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof room_pb.DeleteRoomRequest;
   readonly responseType: typeof room_pb.DeleteRoomReply;
 };
 
-export class Room {
+export class RoomManager {
   static readonly serviceName: string;
-  static readonly GetAllRooms: RoomGetAllRooms;
-  static readonly GetRoomById: RoomGetRoomById;
-  static readonly CreateRoom: RoomCreateRoom;
-  static readonly UpdateRoom: RoomUpdateRoom;
-  static readonly DeleteRoom: RoomDeleteRoom;
+  static readonly GetAllRooms: RoomManagerGetAllRooms;
+  static readonly GetRoomById: RoomManagerGetRoomById;
+  static readonly CreateRoom: RoomManagerCreateRoom;
+  static readonly UpdateRoom: RoomManagerUpdateRoom;
+  static readonly DeleteRoom: RoomManagerDeleteRoom;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -69,7 +69,7 @@ interface ResponseStream<T> {
   on(type: 'status', handler: (status: Status) => void): ResponseStream<T>;
 }
 
-export class RoomClient {
+export class RoomManagerClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: ServiceClientOptions);

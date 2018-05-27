@@ -4,69 +4,69 @@
 var room_pb = require("./room_pb");
 var grpc = require("grpc-web-client").grpc;
 
-var Room = (function () {
-  function Room() {}
-  Room.serviceName = "room.Room";
-  return Room;
+var RoomManager = (function () {
+  function RoomManager() {}
+  RoomManager.serviceName = "room.RoomManager";
+  return RoomManager;
 }());
 
-Room.GetAllRooms = {
+RoomManager.GetAllRooms = {
   methodName: "GetAllRooms",
-  service: Room,
+  service: RoomManager,
   requestStream: false,
   responseStream: false,
   requestType: room_pb.Empty,
   responseType: room_pb.AllRoomsReply
 };
 
-Room.GetRoomById = {
+RoomManager.GetRoomById = {
   methodName: "GetRoomById",
-  service: Room,
+  service: RoomManager,
   requestStream: false,
   responseStream: false,
   requestType: room_pb.RoomByIdRequest,
   responseType: room_pb.RoomByIdReply
 };
 
-Room.CreateRoom = {
+RoomManager.CreateRoom = {
   methodName: "CreateRoom",
-  service: Room,
+  service: RoomManager,
   requestStream: false,
   responseStream: false,
   requestType: room_pb.CreateRoomRequest,
   responseType: room_pb.CreateRoomReply
 };
 
-Room.UpdateRoom = {
+RoomManager.UpdateRoom = {
   methodName: "UpdateRoom",
-  service: Room,
+  service: RoomManager,
   requestStream: false,
   responseStream: false,
   requestType: room_pb.UpdateRoomRequest,
   responseType: room_pb.UpdateRoomReply
 };
 
-Room.DeleteRoom = {
+RoomManager.DeleteRoom = {
   methodName: "DeleteRoom",
-  service: Room,
+  service: RoomManager,
   requestStream: false,
   responseStream: false,
   requestType: room_pb.DeleteRoomRequest,
   responseType: room_pb.DeleteRoomReply
 };
 
-exports.Room = Room;
+exports.RoomManager = RoomManager;
 
-function RoomClient(serviceHost, options) {
+function RoomManagerClient(serviceHost, options) {
   this.serviceHost = serviceHost;
   this.options = options || {};
 }
 
-RoomClient.prototype.getAllRooms = function getAllRooms(requestMessage, metadata, callback) {
+RoomManagerClient.prototype.getAllRooms = function getAllRooms(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  grpc.unary(Room.GetAllRooms, {
+  grpc.unary(RoomManager.GetAllRooms, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -83,11 +83,11 @@ RoomClient.prototype.getAllRooms = function getAllRooms(requestMessage, metadata
   });
 };
 
-RoomClient.prototype.getRoomById = function getRoomById(requestMessage, metadata, callback) {
+RoomManagerClient.prototype.getRoomById = function getRoomById(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  grpc.unary(Room.GetRoomById, {
+  grpc.unary(RoomManager.GetRoomById, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -104,11 +104,11 @@ RoomClient.prototype.getRoomById = function getRoomById(requestMessage, metadata
   });
 };
 
-RoomClient.prototype.createRoom = function createRoom(requestMessage, metadata, callback) {
+RoomManagerClient.prototype.createRoom = function createRoom(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  grpc.unary(Room.CreateRoom, {
+  grpc.unary(RoomManager.CreateRoom, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -125,11 +125,11 @@ RoomClient.prototype.createRoom = function createRoom(requestMessage, metadata, 
   });
 };
 
-RoomClient.prototype.updateRoom = function updateRoom(requestMessage, metadata, callback) {
+RoomManagerClient.prototype.updateRoom = function updateRoom(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  grpc.unary(Room.UpdateRoom, {
+  grpc.unary(RoomManager.UpdateRoom, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -146,11 +146,11 @@ RoomClient.prototype.updateRoom = function updateRoom(requestMessage, metadata, 
   });
 };
 
-RoomClient.prototype.deleteRoom = function deleteRoom(requestMessage, metadata, callback) {
+RoomManagerClient.prototype.deleteRoom = function deleteRoom(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  grpc.unary(Room.DeleteRoom, {
+  grpc.unary(RoomManager.DeleteRoom, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -167,5 +167,5 @@ RoomClient.prototype.deleteRoom = function deleteRoom(requestMessage, metadata, 
   });
 };
 
-exports.RoomClient = RoomClient;
+exports.RoomManagerClient = RoomManagerClient;
 

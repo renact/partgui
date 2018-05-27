@@ -55,7 +55,7 @@ message UpdateRoomReply{
 }
 
 message DeleteRoomRequest{
-    string id = 1;
+    Room room = 1;
 }
 
 message DeleteRoomReply{

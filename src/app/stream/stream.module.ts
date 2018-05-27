@@ -7,11 +7,13 @@ import { StreamComponent } from './shared/stream.component';
 import { JanusModule } from './janus/janus.module';
 import { GrpcModule } from './grpc/grpc.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
 
 import { routing } from './stream.routing';
 import { StartStreamComponent } from './start-stream/start-stream.component';
 import { WatchStreamComponent } from './watch-stream/watch-stream.component';
+import { NgForageModule, NgForageConfig } from 'ngforage';
+import { TokenService } from './token/token.service';
 
 @NgModule({
     declarations: [
@@ -30,7 +32,11 @@ import { WatchStreamComponent } from './watch-stream/watch-stream.component';
         ReactiveFormsModule,
         MatFormFieldModule,
         MatButtonModule,
-        MatInputModule
+        MatInputModule,
+        NgForageModule.forRoot()
+    ],
+    providers: [
+      TokenService
     ],
     exports: [
         StreamComponent,
@@ -40,6 +46,13 @@ import { WatchStreamComponent } from './watch-stream/watch-stream.component';
 })
 
 export class StreamViewsModule {
-    constructor() {
-    }
+    public constructor(ngfConfig: NgForageConfig) {
+        ngfConfig.configure({
+          name: 'HelenaX',
+          driver: [
+            NgForageConfig.DRIVER_INDEXEDDB,
+            NgForageConfig.DRIVER_LOCALSTORAGE
+          ]
+        });
+      }
   }
