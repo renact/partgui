@@ -4,6 +4,8 @@ import { JanusService } from 'app/stream/janus/janus.service';
 import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { GrpcService } from '../grpc/grpc.service';
+import { TokenService } from '../token/token.service';
+import hash from 'hash.js'
 
 
 @Component({
@@ -32,7 +34,8 @@ export class StartStreamComponent implements OnInit, OnDestroy {
   constructor(
     private publisher: PublisherService,
     private formBuilder: FormBuilder,
-    private grpc: GrpcService
+    private grpc: GrpcService,
+    private tokenService: TokenService
   ) {
     this.roomForm = this.formBuilder.group({
       'name': ['', Validators.required],
@@ -45,8 +48,14 @@ export class StartStreamComponent implements OnInit, OnDestroy {
     if (this.roomForm.dirty && this.roomForm.valid) {
       this.grpc.createRoom('1234', this.roomForm.value.name, 'url', this.roomForm.value.password);
       this.roomCreated = true;
+      this.addToken('url','1234', this.roomForm.value.password, this.roomForm.value.name);
       console.log(`Create room:" ${this.roomForm.value.name}`)
     }
+  }
+
+  addToken( url: string, room: string, password: string, name: string){
+    var token = hash.sha256().update(password).digest('hex');
+    this.tokenService.setToken(url, room, token.toString());
   }
 
   ngOnInit() {
