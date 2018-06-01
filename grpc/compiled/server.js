@@ -56,9 +56,29 @@ function getRoomById(call, callback){
     callback(null, reply);
 }
 
-function createRoom(call, callback){
+// function createRoom(call, callback){
+//     var reply = new messages.CreateRoomReply();
+//     reply.setCreated(true);
+//     callback(null, reply);
+// }
+
+function createRoom(request, callback){    
+    return new Promise(function(resolve, reject){
+        resolve("test");
+        // createRoomDb(request, function(err, resp) {
+        //     if (err){
+        //         reject(err);
+        //     } else {
+        //         resolve(resp);
+        //     }
+        // })
+    })
+}
+
+function createRoomDb(call, callback){
     var reply = new messages.CreateRoomReply();
     reply.setCreated(true);
+
     callback(null, reply);
 }
 
@@ -85,6 +105,7 @@ function main() {
      createRoom: createRoom, updateRoom: updateRoom, deleteRoom: deleteRoom});
   server.bind('127.0.0.1:50051', grpc.ServerCredentials.createInsecure());
   server.start();
+  createRoom().then
 }
 
 main();

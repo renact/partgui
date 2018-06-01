@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { grpc} from "grpc-web-client";
 import { RoomManager, RoomManagerClient } from "../../../../grpc/compiled/room_pb_service";
 import { RoomByIdReply, Empty, AllRoomsReply, CreateRoomRequest, UpdateRoomRequest, DeleteRoomRequest, RoomByIdRequest, Room} from '../../../../grpc/compiled/room_pb';
+//import { request } from 'http';
 
 const host = "http://127.0.0.1:8080";
-const client = new RoomManagerClient("http://127.0.0.1:8080");
+const client = new RoomManagerClient("127.0.0.1:8080");
 
 @Injectable()
 export class GrpcService {
@@ -13,16 +14,24 @@ export class GrpcService {
 
   getAllRooms(){
     const allroomsRequest = new Empty();
-    grpc.unary(RoomManager.GetAllRooms, {
-      request: allroomsRequest,
-      host: host,
-      onEnd: res => {
-        const { status, statusMessage, headers, message, trailers } = res;
-        if (status === grpc.Code.OK && message) {
-          console.log("Get all rooms: ", message.toObject());
-        }
+    client.getAllRooms(allroomsRequest, function(error, response) { 
+      if(error){
+        console.log(error.message);
+      } else {
+        console.log(response);
       }
-    });
+     });
+
+    // grpc.unary(RoomManager.GetAllRooms, {
+    //   request: allroomsRequest,
+    //   host: host,
+    //   onEnd: res => {
+    //     const { status, statusMessage, headers, message, trailers } = res;
+    //     if (status === grpc.Code.OK && message) {
+    //       console.log("Get all rooms: ", message.toObject());
+    //     }
+    //   }
+    // });
   }
 
   getRoomById(id: string) {
@@ -40,22 +49,26 @@ export class GrpcService {
     });
   }
 
-  createRoom(id: string, name: string, serverUrl: string, token: string){
-    const createRoomRequest = new CreateRoomRequest();
-    const room = new Room()
-    room.setId(id);
-    room.setName(name);
-    room.setServerurl(serverUrl);
-    createRoomRequest.setRoom(room);
-    grpc.unary(RoomManager.CreateRoom, {
-      request: createRoomRequest,
-      host: host,
-      onEnd: res => {
-        const { status, statusMessage, headers, message, trailers } = res;
-        if (status === grpc.Code.OK && message) {
-          console.log("Created room: ", message.toObject());
-        }
-      }
+  createRoom(id: string, name: string, serverUrl: string, token: string) : Promise<any>{
+    console.log("before promise");
+    return new Promise((resolve,reject) => {
+      const createRoomRequest = new CreateRoomRequest();
+      const room = new Room()
+      room.setId(id);
+      room.setName(name);
+      room.setServerurl(serverUrl);
+      createRoomRequest.setRoom(room);
+      console.log("before client");
+      client.createRoom(createRoomRequest, (err,result) => {
+        console.log("in client");
+        if (err){
+          console.log("hi");
+          reject(err);
+        } else{
+          console.log("hi");              
+          resolve(result);
+        } 
+      });
     });
   }
 

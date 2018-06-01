@@ -46,9 +46,15 @@ export class StartStreamComponent implements OnInit, OnDestroy {
 
   createRoom() {
     if (this.roomForm.dirty && this.roomForm.valid) {
-      this.grpc.createRoom('1234', this.roomForm.value.name, 'url', this.roomForm.value.password);
-      this.roomCreated = true;
-      this.addToken('url','1234', this.roomForm.value.password, this.roomForm.value.name);
+      this.grpc.createRoom('1234', this.roomForm.value.name, 'url', this.roomForm.value.password).then(res => {
+        this.addToken('url','1234', this.roomForm.value.password, this.roomForm.value.name);
+        console.log("hi");
+      });
+      // this.grpc.createRoom('1234', this.roomForm.value.name, 'url', this.roomForm.value.password).then(function(){
+      //   console.log("nice");
+      // }).catch(function(){
+      //   console.log("not so nice");
+      // });
       console.log(`Create room:" ${this.roomForm.value.name}`)
     }
   }
