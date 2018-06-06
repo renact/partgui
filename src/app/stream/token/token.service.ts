@@ -1,5 +1,6 @@
 import { Injectable, Component, OnInit } from '@angular/core';
 import { NgForage, NgForageCache, NgForageConfig, CachedItem } from 'ngforage';
+import hash from 'hash.js'
 
 @Injectable()
 export class TokenService implements OnInit {
@@ -13,17 +14,15 @@ export class TokenService implements OnInit {
   public async getToken<T = any>(url: string, room: string): Promise<T> {
     var object = await this.ngf.getItem<T>("rooms");
 
-    //return item == null ? null : item[url][room];
     return ( (object && object[url] && object[url][room]) || undefined );
   }
 
-  public async setToken<T = any>(url: string, room: string, token: string): Promise<Object> {
+  public async setToken<T = any>(url: string, room: string, password: string): Promise<Object> {
+    var token = hash.sha256().update(password).digest('hex');
     let object = await this.ngf.getItem("rooms");
     object = object || { };
     object[url] = object[url] ||  { };
-    object[url][room] = token;
-    
-    object[url][room] = token;
+    object[url][room] = token.toString();
 
     return this.ngf.setItem("rooms", object);
   }

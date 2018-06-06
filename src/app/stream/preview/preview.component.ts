@@ -21,8 +21,12 @@ export class PreviewComponent {
 
   joinRoom() {
     if (this.roomForm.dirty && this.roomForm.valid) {
-      this.grpc.getRoomById(this.roomForm.value.id);
-      console.log(`Join room:" ${this.roomForm.value.id}`)
+      this.grpc.getRoomById(this.roomForm.value.id).then(res => {
+        console.log(res)
+      }).catch((err) => {
+        console.log("Error occured: " + err);
+      });
+      console.log(`Join room: ${this.roomForm.value.id}`)
     }
   }
 

@@ -43,7 +43,29 @@ function getAllRooms(call, callback){
     
     reply.setPage('1');
     reply.setSize('1');
-    callback(null, reply);
+    
+    let random = Math.random() * 2;
+    if(random >= 10) {
+        let random_error =  Math.random() * 2;
+        
+        // error
+        if (random_error <= 1){
+            callback({
+                code: 500,
+                message: "Unable to connect to database",
+                status: grpc.status.INTERNAL
+              }, null);
+        } else {
+            callback({
+                code: 400,
+                message: "Auhtentication is invalid",
+                status: grpc.status.INTERNAL
+              }, null);
+        }
+    } else {
+        //success
+        callback(null, reply);
+    } 
 }
 
 function getRoomById(call, callback){
@@ -53,45 +75,138 @@ function getRoomById(call, callback){
     room.setName('first1');
     room.setServerurl('url');
     reply.setRoom(room);
-    callback(null, reply);
+
+    let random = Math.random() * 2;
+    if(random >= 1) {
+
+        let random_error =  Math.random() * 3;
+        
+        // error
+        if(random_error <= 1){
+            callback({
+                code: 400,
+                message: "Room doesn't exists",
+                status: grpc.status.INTERNAL
+              }, null);
+        } else if (random_error <= 2){
+            callback({
+                code: 500,
+                message: "Unable to connect to database",
+                status: grpc.status.INTERNAL
+              }, null);
+        } else {
+            callback({
+                code: 400,
+                message: "Auhtentication is invalid",
+                status: grpc.status.INTERNAL
+              }, null);
+        }
+    } else {
+        //success
+        callback(null, reply);
+    } 
 }
 
-// function createRoom(call, callback){
-//     var reply = new messages.CreateRoomReply();
-//     reply.setCreated(true);
-//     callback(null, reply);
-// }
-
-function createRoom(request, callback){    
-    return new Promise(function(resolve, reject){
-        resolve("test");
-        // createRoomDb(request, function(err, resp) {
-        //     if (err){
-        //         reject(err);
-        //     } else {
-        //         resolve(resp);
-        //     }
-        // })
-    })
-}
-
-function createRoomDb(call, callback){
+function createRoom(call, callback){
     var reply = new messages.CreateRoomReply();
     reply.setCreated(true);
 
-    callback(null, reply);
+    let random = Math.random() * 2;
+    if(random >= 1) {
+        let random_error =  Math.random() * 3;
+        
+        // error
+        if(random_error <= 1){
+            callback({
+                code: 400,
+                message: "Room already exists",
+                status: grpc.status.INTERNAL
+              }, null);
+        } else if (random_error <= 2){
+            callback({
+                code: 500,
+                message: "Unable to connect to database",
+                status: grpc.status.INTERNAL
+              }, null);
+        } else {
+            callback({
+                code: 400,
+                message: "Auhtentication is invalid",
+                status: grpc.status.INTERNAL
+              }, null);
+        }
+    } else {
+        //success
+        callback(null, reply);
+    } 
 }
 
 function updateRoom(call, callback){
     var reply = new messages.UpdateRoomReply();
     reply.setUpdated(true);
-    callback(null, reply);
+
+    let random = Math.random() * 2;
+    if(random >= 1) {
+        let random_error =  Math.random() * 3;
+        
+        // error
+        if(random_error <= 1){
+            callback({
+                code: 400,
+                message: "Room doesn't exists",
+                status: grpc.status.INTERNAL
+              }, null);
+        } else if (random_error <= 2){
+            callback({
+                code: 500,
+                message: "Unable to connect to database",
+                status: grpc.status.INTERNAL
+              }, null);
+        } else {
+            callback({
+                code: 400,
+                message: "Auhtentication is invalid",
+                status: grpc.status.INTERNAL
+              }, null);
+        }
+    } else {
+        //success
+        callback(null, reply);
+    } 
 }
 
 function deleteRoom(call, callback){
     var reply = new messages.DeleteRoomReply();
     reply.setDeleted(true);
-    callback(null, reply);
+
+    let random = Math.random() * 2;
+    if(random >= 1) {
+        let random_error =  Math.random() * 3;
+        
+        // error
+        if(random_error <= 1){
+            callback({
+                code: 400,
+                message: "Room doesn't exists",
+                status: grpc.status.INTERNAL
+              }, null);
+        } else if (random_error <= 2){
+            callback({
+                code: 500,
+                message: "Unable to connect to database",
+                status: grpc.status.INTERNAL
+              }, null);
+        } else {
+            callback({
+                code: 400,
+                message: "Auhtentication is invalid",
+                status: grpc.status.INTERNAL
+              }, null);
+        }
+    } else {
+        //success
+        callback(null, reply);
+    } 
 }
 
 /**
@@ -105,7 +220,6 @@ function main() {
      createRoom: createRoom, updateRoom: updateRoom, deleteRoom: deleteRoom});
   server.bind('127.0.0.1:50051', grpc.ServerCredentials.createInsecure());
   server.start();
-  createRoom().then
 }
 
 main();

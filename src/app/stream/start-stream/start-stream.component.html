@@ -14,11 +14,20 @@
 </div>
 
 <div *ngIf="roomCreated">
-    local stream:
+    <h1>Local stream:</h1>
     <button (click)="startStreaming()">Start streaming</button>
     <button (click)="stopStreaming()">Stop streaming</button>
-    <button (click)="quitRoom()">Close room</button>
+    <button (click)="quitRoom()">Close room</button> <br>
 
+    <h1>Edit room:</h1>
+
+    <form [formGroup]="editRoomForm" (submit)="editRoom()">
+        <mat-form-field>
+            <input matInput formControlName="name" id="name" placeholder="name">
+        </mat-form-field>
+    
+        <button mat-raised-button color="primary" type="submit" [disabled]="!editRoomForm.valid">Submit</button>
+    </form>
 
     <video #localvideo width="100%" height="100%" autoplay muted="muted"></video>
 </div>

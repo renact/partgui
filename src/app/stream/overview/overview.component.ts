@@ -7,6 +7,7 @@ import { TokenService } from '../token/token.service';
   templateUrl: './overview.component.html'
 })
 export class OverviewComponent implements OnInit {
+  rooms: any;
 
   constructor(
     private grpc: GrpcService,
@@ -14,15 +15,16 @@ export class OverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    // this.grpc.getRoomById();
-    // this.grpc.createRoom();
-    // this.grpc.updateRoom();
-    // this.grpc.deleteRoom();
-    //this.grpc.getAllRooms();
-    this.getIt();
+    this.grpc.getAllRooms().then(res => {
+      this.rooms = res["roomsList"];
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    this.getToken();
     console.log(this.tokenService.setToken("url", "room", "token"));
   }
-  public async getIt(){
+  public async getToken(){
     console.log("token " + await this.tokenService.getToken("url", "room"));
   }
  }

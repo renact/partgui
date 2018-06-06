@@ -28,8 +28,12 @@ export class JanusService {
   */
   public life_j = new BehaviorSubject(false);
 
-  constructor() {
-    this.api_initialize_janus("https://janus.conf.meetecho.com/janus");
+  constructor(janusServer: string) {
+    try {
+      this.api_initialize_janus(janusServer);
+    } catch (error) {
+      console.log("Janus service error: " + error);      
+    }
   }
 
   api_initialize_janus(server?: string) {
@@ -40,6 +44,7 @@ export class JanusService {
  
     // Initialize the library (all console debuggers enabled)
     Janus.init({ debug: "all", callback: this.janus_initialized.bind(this) });
+
   }
 
   janus_initialized(): void {

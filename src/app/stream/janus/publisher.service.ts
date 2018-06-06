@@ -19,9 +19,9 @@ export class PublisherService extends PluginService {
   public stream = new BehaviorSubject(false);
 
   constructor(
-    private janusConnection_: JanusService
+    janusServer: string
   ) {
-    super(janusConnection_);
+    super(new JanusService(janusServer));
   }
 
 
